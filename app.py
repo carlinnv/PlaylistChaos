@@ -323,18 +323,22 @@ def stats_section(playlists):
     """Render statistics based on the playlists."""
     st.header("Playlist stats")
 
+    # Get all statistics from playlists
     stats = compute_playlist_stats(playlists)
 
+    # First row: Song counts by category
     col1, col2, col3 = st.columns(3)
     col1.metric("Total songs", stats["total_songs"])
     col2.metric("Hype songs", stats["hype_count"])
     col3.metric("Chill songs", stats["chill_count"])
 
+    # Second row: Additional metrics
     col4, col5, col6 = st.columns(3)
     col4.metric("Mixed songs", stats["mixed_count"])
     col5.metric("Hype ratio", f"{stats['hype_ratio']:.2f}")
     col6.metric("Average energy", f"{stats['avg_energy']:.2f}")
 
+    # Most common artist
     top_artist = stats["top_artist"]
     if top_artist:
         st.write(
